@@ -11,9 +11,9 @@ const int BTN_PIN = 4;
 
 const int LED_SPEED_MS = 700; // led blinking speed
 
-const uint32_t WORK_T_MS = 1500000; // 25 min
-const uint32_t REST_T_MS = 300000; // 5 min
-const uint32_t LONG_REST_T_MS = 1200000; // 20 min
+const uint32_t WORK_T_MS = 1500000; // work time 25 min
+const uint32_t REST_T_MS = 300000; // rest time 5 min
+const uint32_t LONG_REST_T_MS = 1200000; // long rest 20 min
 
 ////
 
