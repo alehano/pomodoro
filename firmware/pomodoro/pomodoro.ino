@@ -21,7 +21,7 @@ int curLed = LED_R_PIN;
 int ledState = 0; // 0 - off, 1 - on, 2 - blinking
 bool ledOn = false;
 
-int pomadoros = 0;
+int pomodoros = 0;
 int state = 0; // 0 - pause, 1 - work, 2 - work end, 3 - rest, 4 - rest end
 int initState = true;
 
@@ -81,10 +81,10 @@ void loop() {
         setCurLed(LED_R_PIN);
         setLedState(2);
 
-        pomadoros = pomadoros+1;
-        if (pomadoros >= 4) {
+        pomodoros = pomodoros+1;
+        if (pomodoros >= 4) {
           // long rest
-          pomadoros = 0;
+          pomodoros = 0;
           mainTmr.setTime(LONG_REST_T_MS);
           beepLongRest();
         } else {
