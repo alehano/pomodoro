@@ -3,11 +3,17 @@
 
 //// setup 
 
-const int LED_R_PIN = 10;
-const int LED_G_PIN = 11;
-const int LED_B_PIN = 12;
-const int BUZ_PIN = 5;
-const int BTN_PIN = 4;
+// const int LED_R_PIN = 10;
+// const int LED_G_PIN = 11;
+// const int LED_B_PIN = 12;
+// const int BUZ_PIN = 5;
+// const int BTN_PIN = 4;
+
+const int LED_R_PIN = 2;
+const int LED_G_PIN = 1;
+const int LED_B_PIN = 0;
+const int BUZ_PIN = 4;
+const int BTN_PIN = 3;
 
 const int LED_SPEED_MS = 700; // led blinking speed
 
@@ -25,7 +31,7 @@ int pomodoros = 0;
 int state = 0; // 0 - pause, 1 - work, 2 - work end, 3 - rest, 4 - rest end
 int initState = true;
 
-EncButton<EB_TICK, BTN_PIN> btn;
+EncButton<EB_TICK, BTN_PIN> btn(INPUT);
 
 TimerMs ledTmr(LED_SPEED_MS, 1, 0);
 TimerMs mainTmr(WORK_T_MS, 0, 1);
@@ -66,9 +72,7 @@ void loop() {
         mainTmr.setTime(WORK_T_MS);
         mainTmr.start();
       }
-      if (mainTmr.tick()) {
-        setState(2);
-      }
+      if (mainTmr.tick()) setState(2);
       if (btn.release()) {
         beepClick();
         setState(0);
@@ -105,9 +109,7 @@ void loop() {
         setLedState(1);
         mainTmr.start();
       }
-      if (mainTmr.tick()) {
-        setState(4);
-      }
+      if (mainTmr.tick()) setState(4);
       if (btn.release()) {
         beepClick();
         setState(1);
@@ -119,7 +121,6 @@ void loop() {
 
         setCurLed(LED_G_PIN);
         setLedState(2);
-
         beepEnd();
       }
       if (btn.release()) {
@@ -133,14 +134,10 @@ void loop() {
   if (ledTmr.tick()) {
     switch (ledState) {
       case 0: 
-        if (ledOn) {
-          ledSwitch(false);
-        };
+        if (ledOn)ledSwitch(false);
         break;
       case 1: 
-        if (!ledOn) {
-          ledSwitch(true);
-        };
+        if (!ledOn) ledSwitch(true);;
         break;
       case 2: 
         ledSwitch(!ledOn);
